@@ -229,14 +229,14 @@ function MediaGallery({ video, screenshots, title }: { video?: string; screensho
         <div className="flex gap-2 font-display">
           {[{ k: "video", label: "▶ Demo" }, { k: "screenshots", label: `📸 Screens (${screenshots!.length})` }].map(({ k, label }) => (
             <button key={k} onClick={() => setTab(k as "video" | "screenshots")}
-              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all border cursor-pointer doodle-effect ${tab === k ? "bg-foreground text-background border-foreground" : "bg-background border-foreground/20 text-muted-foreground hover:text-foreground"}`}>
+              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all border cursor-pointer ${tab === k ? "bg-foreground text-background border-foreground" : "bg-background border-foreground/20 text-muted-foreground hover:text-foreground"}`}>
               {label}
             </button>
           ))}
         </div>
       )}
       {tab === "video" && video && (
-        <div className="relative rounded-xl overflow-hidden border border-foreground/20 doodle-effect">
+        <div className="relative rounded-xl overflow-hidden border border-foreground/20">
           {getYouTubeEmbedUrl(video)
             ? <iframe src={getYouTubeEmbedUrl(video)!} className="w-full aspect-video" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
             : <video src={video} controls className="w-full aspect-video object-cover" />}
@@ -244,8 +244,8 @@ function MediaGallery({ video, screenshots, title }: { video?: string; screensho
       )}
       {tab === "screenshots" && screenshots && screenshots.length > 0 && (
         <div className="space-y-3">
-          <div className="relative rounded-xl overflow-hidden border border-foreground/20 doodle-effect">
-            <img src={screenshots[shot]} alt={`${title} ${shot + 1}`} className="w-full aspect-video object-cover" />
+          <div className="relative rounded-xl overflow-hidden border border-foreground/20">
+            <img loading="lazy" decoding="async" src={screenshots[shot]} alt={`${title} ${shot + 1}`} className="w-full aspect-video object-cover" />
             {screenshots.length > 1 && (
               <>
                 <button onClick={() => setShot(p => (p - 1 + screenshots.length) % screenshots.length)} className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-background border border-foreground/30 cursor-pointer"><ChevronLeft className="w-4 h-4" /></button>
@@ -257,7 +257,7 @@ function MediaGallery({ video, screenshots, title }: { video?: string; screensho
             <div className="flex gap-2 overflow-x-auto no-scrollbar">
               {screenshots.map((src, i) => (
                 <button key={i} onClick={() => setShot(i)} className={`shrink-0 w-20 aspect-video rounded overflow-hidden border cursor-pointer transition-all ${i === shot ? "border-foreground" : "border-foreground/20 opacity-50 hover:opacity-100"}`}>
-                  <img src={src} className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={src} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -332,7 +332,6 @@ function ProjectCard({
         className="relative w-full h-full bg-card-bg border-[2.5px] border-foreground overflow-hidden select-none"
         style={{
           borderRadius: "var(--doodle-radius)",
-          filter: "url(#doodle-border-filter)",
           boxShadow: isActive ? "5px 6px 0 0 currentColor" : "3px 4px 0 0 currentColor",
         }}
       >
@@ -344,7 +343,7 @@ function ProjectCard({
 
         {/* Image panel — top half */}
         <div className="relative h-[52%] overflow-hidden border-b-[2px] border-dashed border-foreground/20">
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+          <img loading="lazy" decoding="async" src={project.image} alt={project.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/30" />
 
           {/* Big project number watermark */}
@@ -370,7 +369,7 @@ function ProjectCard({
           {/* Tech tags */}
           <div className="flex flex-wrap gap-1 mt-auto">
             {project.techStack.map(t => (
-              <span key={t} className="px-2 py-0.5 font-display text-[9px] font-bold uppercase tracking-wide text-muted-foreground border border-dashed border-foreground/25 rounded-sm bg-background doodle-effect">
+              <span key={t} className="px-2 py-0.5 font-display text-[9px] font-bold uppercase tracking-wide text-muted-foreground border border-dashed border-foreground/25 rounded-sm bg-background">
                 {t}
               </span>
             ))}
@@ -450,7 +449,7 @@ export function ProjectsSection() {
                 {/* Tech stack */}
                 <div className="flex flex-wrap gap-2">
                   {activeProject.techStack.map(t => (
-                    <span key={t} className="px-3 py-1.5 font-display text-xs font-bold border border-foreground/25 bg-background text-muted-foreground rounded-sm doodle-effect">
+                    <span key={t} className="px-3 py-1.5 font-display text-xs font-bold border border-foreground/25 bg-background text-muted-foreground rounded-sm">
                       {t}
                     </span>
                   ))}
@@ -539,7 +538,6 @@ export function ProjectsSection() {
                 borderRadius: "var(--doodle-radius)",
                 transform: `translateY(${depth * 12}px) translateX(${((current + depth) * 17 % 9) - 4}px) rotate(${((current + depth) * 41 % 9) - 4.5}deg)`,
                 zIndex: 40 - depth,
-                filter: "url(#doodle-border-filter)",
               }}
             />
           ))}
@@ -553,7 +551,7 @@ export function ProjectsSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 className="absolute inset-0 bg-card-bg border-[2.5px] border-dashed border-foreground/30 flex flex-col items-center justify-center text-center p-10 z-50"
-                style={{ borderRadius: "var(--doodle-radius)", filter: "url(#doodle-border-filter)" }}
+                style={{ borderRadius: "var(--doodle-radius)" }}
               >
                 <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" className="mb-5 text-foreground/30">
                   <circle cx="28" cy="28" r="24" />
@@ -607,7 +605,7 @@ export function ProjectsSection() {
               <div className="absolute top-0 left-0 w-full h-1.5" style={{ background: selected.accent, opacity: 0.65, borderRadius: "inherit" }} />
 
               <button onClick={() => setSelected(null)}
-                className="absolute top-5 right-5 p-2 rounded-xl border border-foreground/20 hover:border-foreground bg-background text-foreground transition-all cursor-pointer z-10 doodle-effect">
+                className="absolute top-5 right-5 p-2 rounded-xl border border-foreground/20 hover:border-foreground bg-background text-foreground transition-all cursor-pointer z-10">
                 <X className="w-4 h-4" />
               </button>
 
@@ -615,8 +613,8 @@ export function ProjectsSection() {
                 {((selected as any).video || (selected as any).screenshots?.length) ? (
                   <MediaGallery video={(selected as any).video} screenshots={(selected as any).screenshots} title={selected.title} />
                 ) : (
-                  <div className="relative aspect-video rounded-xl overflow-hidden border border-foreground/20 bg-muted doodle-effect">
-                    <img src={selected.image} alt={selected.title} className="w-full h-full object-cover" />
+                  <div className="relative aspect-video rounded-xl overflow-hidden border border-foreground/20 bg-muted">
+                    <img loading="lazy" decoding="async" src={selected.image} alt={selected.title} className="w-full h-full object-cover" />
                   </div>
                 )}
 
@@ -634,7 +632,7 @@ export function ProjectsSection() {
                       <h5 className="text-xs uppercase tracking-[0.25em] text-primary font-bold font-display">Key Features</h5>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {selected.details.features.map((f, i) => (
-                          <li key={i} className="flex gap-3 text-sm font-bold text-foreground/80 p-4 rounded-xl border border-foreground/15 bg-background doodle-effect font-display">
+                          <li key={i} className="flex gap-3 text-sm font-bold text-foreground/80 p-4 rounded-xl border border-foreground/15 bg-background font-display">
                             <span className="text-foreground shrink-0">✓</span>{f}
                           </li>
                         ))}
@@ -647,7 +645,7 @@ export function ProjectsSection() {
                       <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-bold font-display block mb-3">Technologies</span>
                       <div className="flex flex-wrap gap-2">
                         {selected.techStack.map(t => (
-                          <span key={t} className="px-3 py-1.5 text-xs font-bold font-display border border-foreground/20 bg-background rounded-full doodle-effect">{t}</span>
+                          <span key={t} className="px-3 py-1.5 text-xs font-bold font-display border border-foreground/20 bg-background rounded-full">{t}</span>
                         ))}
                       </div>
                     </div>
@@ -661,7 +659,7 @@ export function ProjectsSection() {
                         { href: selected.live, label: "Live Demo", icon: <Globe className="w-4 h-4 shrink-0" /> },
                       ].map(({ href, label, icon }) => (
                         <a key={label} href={href} target="_blank" rel="noreferrer"
-                          className="flex items-center gap-3 text-sm py-2.5 px-4 rounded-xl border border-foreground/15 hover:border-foreground bg-background hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-colors group/l doodle-effect">
+                          className="flex items-center gap-3 text-sm py-2.5 px-4 rounded-xl border border-foreground/15 hover:border-foreground bg-background hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-colors group/l">
                           {icon}
                           <span className="font-display font-bold">{label}</span>
                           <ArrowUpRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover/l:opacity-100 transition-opacity" />

@@ -29,7 +29,7 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -65,7 +65,7 @@ export function Navbar() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="relative z-10 p-2 text-muted-foreground hover:text-foreground transition-all rounded-xl border-2 border-foreground/30 hover:border-foreground bg-background doodle-effect cursor-pointer"
+                className="relative z-10 p-2 text-muted-foreground hover:text-foreground transition-all rounded-xl border-2 border-foreground/30 hover:border-foreground bg-background cursor-pointer"
                 aria-label="Toggle theme"
               >
                 <DoodleLightBulb size={15} className={theme === "light" ? "fill-foreground text-foreground" : "text-muted-foreground"} />
@@ -85,7 +85,7 @@ export function Navbar() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-1.5 text-muted-foreground hover:text-foreground transition-all rounded-xl border-2 border-foreground/30 bg-background doodle-effect cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground transition-all rounded-xl border-2 border-foreground/30 bg-background cursor-pointer"
                 aria-label="Toggle theme"
               >
                 <DoodleLightBulb size={14} className={theme === "light" ? "fill-foreground text-foreground" : "text-muted-foreground"} />

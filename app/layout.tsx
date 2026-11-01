@@ -56,10 +56,16 @@ export default function RootLayout({
         <svg style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }} xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="doodle-border-filter" x="-8%" y="-8%" width="116%" height="116%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.006 0.008" numOctaves="3" seed="2" result="noise" />
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G" result="displaced" />
-              <feGaussianBlur in="displaced" stdDeviation="0.3" />
+              <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="2" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G" />
             </filter>
+            {/* Three seeds swapped in quick succession give lines the "boiling" hand-drawn jitter */}
+            {[3, 11, 27].map((seed, i) => (
+              <filter key={seed} id={`doodle-boil-${i + 1}`} x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed={seed} result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
+            ))}
           </defs>
         </svg>
       </body>

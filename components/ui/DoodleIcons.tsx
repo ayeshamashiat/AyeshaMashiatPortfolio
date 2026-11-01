@@ -20,7 +20,7 @@ export function DoodleStar({ className = "", size = 28, ...props }: DoodleProps)
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       <path
@@ -57,7 +57,7 @@ export function DoodleCloud({ className = "", size = 48, arrow = false, ...props
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       {/* Hand-drawn wobbly cloud outline */}
@@ -145,7 +145,7 @@ export function DoodleBrowser({
   innerClassName?: string;
 }) {
   return (
-    <div className={`relative bg-card-bg border-[2.5px] border-foreground rounded-[25px_10px_20px_10px/10px_20px_10px_25px] shadow-[4px_5px_0_0_currentColor] filter url(#doodle-border-filter) ${className}`}>
+    <div className={`relative bg-card-bg border-[2.5px] border-foreground rounded-[25px_10px_20px_10px/10px_20px_10px_25px] shadow-[4px_5px_0_0_currentColor] doodle-effect ${className}`}>
       {/* Top Browser Bar */}
       <div className="flex items-center justify-between border-b-[2px] border-foreground px-4 py-2 bg-foreground/5">
         <div className="flex items-center gap-1.5">
@@ -189,7 +189,7 @@ export function DoodleMonitor({
   return (
     <div className={`flex flex-col items-center select-none ${className}`}>
       {/* Monitor Screen Frame */}
-      <div className="relative w-full bg-card-bg border-[3px] border-foreground rounded-[30px_15px_25px_15px/15px_25px_15px_30px] p-5 shadow-[4px_5px_0_0_currentColor] filter url(#doodle-border-filter) z-10">
+      <div className="relative w-full bg-card-bg border-[3px] border-foreground rounded-[30px_15px_25px_15px/15px_25px_15px_30px] p-5 shadow-[4px_5px_0_0_currentColor] doodle-effect z-10">
         {/* Top 3 dots */}
         <div className="absolute top-2.5 left-4 flex gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
@@ -229,7 +229,7 @@ export function DoodleMegaphone({ className = "", size = 32, ...props }: DoodleP
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       <path
@@ -263,7 +263,7 @@ export function DoodleShield({ className = "", size = 36, ...props }: DoodleProp
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       <path
@@ -296,7 +296,7 @@ export function DoodleLightBulb({ className = "", size = 32, ...props }: DoodleP
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       {/* Bulb body */}
@@ -341,7 +341,7 @@ export function DoodleHourglass({ className = "", size = 32, ...props }: DoodleP
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       {/* Top and bottom bars */}
@@ -384,7 +384,7 @@ export function DoodleBell({ className = "", size = 32, ...props }: DoodleProps)
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       <path
@@ -433,7 +433,7 @@ export function DoodleArrow({ className = "", size = 32, direction = "right", ..
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       style={{ transform: getRotation() }}
       {...props}
     >
@@ -449,7 +449,7 @@ export function DoodleArrow({ className = "", size = 32, direction = "right", ..
 export function DoodleTape({ className = "", text = "", ...props }: { className?: string; text?: string }) {
   return (
     <div
-      className={`absolute w-28 h-6 bg-amber-100/60 dark:bg-amber-950/20 border-x border-dashed border-amber-500/30 rotate-[-1.5deg] z-10 pointer-events-none filter url(#doodle-border-filter) flex items-center justify-center ${className}`}
+      className={`absolute w-28 h-6 bg-amber-100/60 dark:bg-amber-950/20 border-x border-dashed border-amber-500/30 rotate-[-1.5deg] z-10 pointer-events-none doodle-effect flex items-center justify-center ${className}`}
       style={{
         boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
       }}
@@ -471,7 +471,7 @@ export function DoodleBookmark({ className = "", size = 32, ...props }: DoodlePr
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`text-foreground ${className}`}
+      className={`text-foreground doodle-ink ${className}`}
       {...props}
     >
       <path
@@ -491,11 +491,31 @@ export function DoodleBookmark({ className = "", size = 32, ...props }: DoodlePr
   );
 }
 
-// 14. Search Bar Decoration
-export function DoodleSearch({ className = "", size = 20, ...props }: DoodleProps) {
+// 14. Search Bar (works as a controlled input when value/onChange are given)
+export function DoodleSearch({
+  className = "",
+  size = 20,
+  value,
+  onChange,
+  placeholder = "Search...",
+}: {
+  className?: string;
+  size?: number;
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+}) {
   return (
-    <div className={`flex items-center gap-2 border-[2.2px] border-foreground rounded-[100px_10px_90px_8px/8px_80px_10px_100px] px-3.5 py-1.5 bg-card-bg filter url(#doodle-border-filter) ${className}`}>
-      <span className="font-heading text-xs tracking-wider text-muted-foreground select-none uppercase">Search...</span>
+    <label className={`flex items-center gap-2 border-[2.2px] border-foreground rounded-[100px_10px_90px_8px/8px_80px_10px_100px] px-3.5 py-1.5 bg-card-bg doodle-effect focus-within:shadow-[3px_3px_0_0_currentColor] transition-shadow ${className}`}>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
+        readOnly={!onChange}
+        placeholder={placeholder}
+        aria-label={placeholder}
+        className="min-w-0 flex-1 bg-transparent outline-none font-heading text-xs tracking-wider uppercase text-foreground placeholder:text-muted-foreground"
+      />
       <svg
         width={size}
         height={size}
@@ -505,12 +525,11 @@ export function DoodleSearch({ className = "", size = 20, ...props }: DoodleProp
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-foreground ml-auto"
-        {...props}
+        className="text-foreground ml-auto shrink-0"
       >
         <circle cx="11" cy="11" r="6" />
         <path d="M16 16 L21 21" />
       </svg>
-    </div>
+    </label>
   );
 }

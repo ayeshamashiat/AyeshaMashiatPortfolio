@@ -36,7 +36,7 @@ export function Preloader() {
               <span className="text-sm font-bold tracking-[0.2em] text-foreground uppercase">Ayesha Mashiat</span>
               <span className="text-xs font-mono text-muted-foreground">{progress}%</span>
             </div>
-            <div className="w-full h-4 border-2 border-foreground bg-background rounded relative overflow-hidden doodle-effect">
+            <div className="w-full h-4 border-2 border-foreground bg-background rounded relative overflow-hidden">
               <motion.div 
                 className="absolute top-0 left-0 h-full bg-foreground"
                 initial={{ width: 0 }}

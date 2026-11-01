@@ -30,7 +30,7 @@ export function ExperienceSection() {
       {/* Floating Star */}
       <motion.div
         animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 4.5, repeat: 0, ease: "easeInOut" }}
         className="absolute top-24 left-1/4 opacity-25 pointer-events-none"
       >
         <DoodleStar size={24} />
@@ -44,21 +44,20 @@ export function ExperienceSection() {
               <span>Education & Journey</span>
             </h3>
           </div>
-          <DoodleHourglass className="opacity-70 animate-pulse ml-auto" size={36} />
+          <DoodleHourglass className="opacity-70 ml-auto" size={36} />
         </AnimatedSection>
 
-        <div className="relative border-l-[3px] border-foreground/30 pl-8 md:pl-16 ml-4 md:ml-6 space-y-16 doodle-effect">
+        <div className="relative border-l-[3px] border-foreground/30 pl-8 md:pl-16 ml-4 md:ml-6 space-y-16">
           {TIMELINE.map((item, index) => (
             <AnimatedSection key={index} delay={index * 0.1}>
               <div className="relative">
                 {/* Wobbly Hourglass Timeline Node */}
-                <div className="absolute -left-[49px] md:-left-[82px] top-1.5 z-10 flex items-center justify-center bg-background border-2 border-foreground rounded-full p-1.5 w-9 h-9 md:w-12 md:h-12 doodle-effect shadow-[2px_2px_0_0_currentColor]">
+                <div className="absolute -left-[49px] md:-left-[82px] top-1.5 z-10 flex items-center justify-center bg-background border-2 border-foreground rounded-full p-1.5 w-9 h-9 md:w-12 md:h-12 shadow-[2px_2px_0_0_currentColor]">
                   <DoodleHourglass size={18} className="text-foreground" />
                 </div>
 
                 {/* Timeline Card */}
                 <div className="doodle-card p-6 md:p-8 relative group">
-                  <div className="absolute inset-0 hatch-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none" />
 
                   {/* Tape header decoration */}
                   <DoodleTape text="CERTIFIED" className="-top-3 left-10 md:left-14" />
@@ -69,7 +68,7 @@ export function ExperienceSection() {
                       {item.date}
                     </span>
                     <span
-                      className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border-2 border-foreground bg-background text-foreground doodle-effect shadow-[1.5px_1.5px_0_0_currentColor]"
+                      className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border-2 border-foreground bg-background text-foreground shadow-[1.5px_1.5px_0_0_currentColor]"
                     >
                       {item.badge}
                     </span>

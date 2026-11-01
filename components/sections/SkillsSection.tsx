@@ -3,6 +3,7 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { DoodleSearch, DoodleStar } from "@/components/ui/DoodleIcons";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const SKILL_CATEGORIES = [
   {
@@ -49,12 +50,22 @@ function SpiralRings() {
 }
 
 export function SkillsSection() {
+  const [query, setQuery] = useState("");
+  const [circled, setCircled] = useState<Set<string>>(new Set());
+  const q = query.trim().toLowerCase();
+  const toggle = (item: string) =>
+    setCircled((prev) => {
+      const next = new Set(prev);
+      if (!next.delete(item)) next.add(item);
+      return next;
+    });
+
   return (
     <section id="skills" className="py-32 px-6 md:px-12 lg:px-24 border-y-2 border-foreground/30 bg-card-bg/15 relative overflow-hidden">
       {/* Background doodle star */}
       <motion.div
         animate={{ rotate: [0, -360] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 25, repeat: 0, ease: "linear" }}
         className="absolute bottom-12 right-12 opacity-35 pointer-events-none"
       >
         <DoodleStar size={36} />
@@ -69,9 +80,17 @@ export function SkillsSection() {
           
           {/* Custom Search bar decoration from the reference image */}
           <AnimatedSection delay={0.2} className="w-full max-w-[260px] self-start md:self-auto">
-            <DoodleSearch />
+            <DoodleSearch value={query} onChange={setQuery} placeholder="Search skills..." />
           </AnimatedSection>
         </div>
+
+        <p className="-mt-8 mb-10 text-sm text-muted-foreground font-display">
+          {circled.size === 0
+            ? "psst: tap any skill to circle it ✎"
+            : circled.size < 5
+              ? `${circled.size} circled, keep going…`
+              : <>{circled.size} circled: great taste. <a href="#contact" className="underline decoration-wavy text-foreground">let&apos;s talk</a></>}
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {SKILL_CATEGORIES.map((category, index) => (
@@ -81,21 +100,38 @@ export function SkillsSection() {
                 <SpiralRings />
 
                 {/* Diagonal hatch details on hover */}
-                <div className="absolute inset-0 hatch-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none" />
 
                 <h4 className="text-xl font-bold text-foreground mb-6 pb-3 border-b-2 border-dashed border-foreground/15 font-display relative z-10">
                   {category.name}
                 </h4>
                 
                 <div className="flex flex-wrap gap-2.5 relative z-10">
-                  {category.items.map((item) => (
-                    <span 
-                      key={item} 
-                      className="px-3 py-1.5 rounded-full text-xs font-bold bg-background hover:bg-foreground/5 border-[1.8px] border-foreground/30 hover:border-foreground text-muted-foreground hover:text-foreground transition-all duration-200 cursor-default doodle-effect font-display"
-                    >
-                      {item}
-                    </span>
-                  ))}
+                  {category.items.map((item) => {
+                    const match = !q || item.toLowerCase().includes(q);
+                    const picked = circled.has(item);
+                    return (
+                      <motion.button
+                        key={item}
+                        type="button"
+                        onClick={() => toggle(item)}
+                        aria-pressed={picked}
+                        animate={{ opacity: match ? 1 : 0.2, scale: match && q ? 1.06 : 1 }}
+                        whileTap={{ scale: 0.88, rotate: -4 }}
+                        className={`relative px-3 py-1.5 rounded-full text-xs font-bold border-[1.8px] transition-colors duration-200 font-display ${
+                          picked
+                            ? "bg-foreground text-background border-foreground"
+                            : "bg-background hover:bg-foreground/5 border-foreground/30 hover:border-foreground text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {item}
+                        {picked && (
+                          <svg className="pointer-events-none absolute -inset-1.5 h-[calc(100%+12px)] w-[calc(100%+12px)] text-red-500" viewBox="0 0 100 40" preserveAspectRatio="none" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                            <path pathLength={1} className="scribble-path" d="M50 3 C85 1, 99 10, 97 22 C95 34, 60 39, 35 37 C8 35, 1 24, 5 14 C9 5, 38 2, 62 4" />
+                          </svg>
+                        )}
+                      </motion.button>
+                    );
+                  })}
                 </div>
               </div>
             </AnimatedSection>

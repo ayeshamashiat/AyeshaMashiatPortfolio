@@ -29,7 +29,7 @@ export function AchievementsSection() {
       {/* Background stars */}
       <motion.div
         animate={{ y: [0, 8, 0], rotate: [0, 10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 5, repeat: 0, ease: "easeInOut" }}
         className="absolute top-16 right-1/4 opacity-25 pointer-events-none"
       >
         <DoodleStar size={24} />
@@ -46,7 +46,7 @@ export function AchievementsSection() {
               Recognition earned through competitions, teamwork, hackathons, and independent challenges.
             </p>
           </div>
-          <DoodleMegaphone className="text-foreground/70 animate-bounce ml-auto hidden sm:block" size={40} />
+          <DoodleMegaphone className="text-foreground/70 ml-auto hidden sm:block" size={40} />
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -72,14 +72,14 @@ export function AchievementsSection() {
                   
                   {/* Zoom hint */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="px-3.5 py-2 rounded-xl border-2 border-foreground bg-background text-xs font-bold tracking-wider text-foreground uppercase doodle-effect shadow-[2px_2px_0_0_currentColor]">
+                    <span className="px-3.5 py-2 rounded-xl border-2 border-foreground bg-background text-xs font-bold tracking-wider text-foreground uppercase shadow-[2px_2px_0_0_currentColor]">
                       View Certificate
                     </span>
                   </div>
                   
                   {/* Badge overlay */}
                   <div
-                    className="absolute top-3 left-3 px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-widest border-2 border-foreground bg-background text-foreground doodle-effect shadow-[1.5px_1.5px_0_0_currentColor]"
+                    className="absolute top-3 left-3 px-2.5 py-1 rounded text-[9px] font-bold uppercase tracking-widest border-2 border-foreground bg-background text-foreground shadow-[1.5px_1.5px_0_0_currentColor]"
                   >
                     {item.badge}
                   </div>
@@ -93,7 +93,7 @@ export function AchievementsSection() {
                       <span className="text-xs text-foreground/80 font-bold font-display underline decoration-wavy underline-offset-4">{item.issuer}</span>
                     </div>
                     <span
-                      className="shrink-0 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border-2 border-foreground bg-background text-foreground doodle-effect shadow-[1.5px_1.5px_0_0_currentColor] font-display"
+                      className="shrink-0 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded border-2 border-foreground bg-background text-foreground shadow-[1.5px_1.5px_0_0_currentColor] font-display"
                     >
                       {item.category}
                     </span>
@@ -134,14 +134,14 @@ export function AchievementsSection() {
             >
               <button
                 onClick={() => setLightbox(null)}
-                className="absolute -top-4 -right-4 z-10 p-2.5 rounded-xl border-2 border-foreground text-foreground bg-background hover:bg-muted transition-colors doodle-effect shadow-[2px_2px_0_0_currentColor] cursor-pointer"
+                className="absolute -top-4 -right-4 z-10 p-2.5 rounded-xl border-2 border-foreground text-foreground bg-background hover:bg-muted transition-colors shadow-[2px_2px_0_0_currentColor] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
               <img
                 src={lightbox}
                 alt="Certificate"
-                className="w-full rounded border-2 border-foreground shadow-lg doodle-effect"
+                className="w-full rounded border-2 border-foreground shadow-lg"
               />
             </motion.div>
           </motion.div>

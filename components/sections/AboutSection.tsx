@@ -36,7 +36,7 @@ export function AboutSection() {
   return (
     <section id="about" className="py-32 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative">
       {/* Decorative stars near title */}
-      <div className="absolute top-28 right-12 opacity-30 animate-pulse pointer-events-none">
+      <div className="absolute top-28 right-12 opacity-30 pointer-events-none">
         <DoodleStar size={20} />
       </div>
 
@@ -62,9 +62,8 @@ export function AboutSection() {
               className="p-6 doodle-card group relative overflow-hidden"
             >
               {/* Subtle hatch background detail on hover */}
-              <div className="absolute inset-0 hatch-bg opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none" />
               
-              <div className="p-2.5 w-fit border-2 border-foreground/30 rounded-xl bg-background doodle-effect mb-4 relative z-10">
+              <div className="p-2.5 w-fit border-2 border-foreground/30 rounded-xl bg-background mb-4 relative z-10">
                 {val.icon}
               </div>
               <h4 className="text-lg font-bold text-foreground mb-2 font-display relative z-10">{val.title}</h4>

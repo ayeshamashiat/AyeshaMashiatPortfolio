@@ -80,7 +80,7 @@ body::before {
   background-color: rgba(248, 113, 113, 0.18);
 }
 
-@media (max-w: 768px) {
+@media (max-width: 768px) {
   body::before {
     left: 20px;
   }
@@ -99,7 +99,6 @@ body::before {
   background: var(--foreground);
   border: 3.5px solid var(--background);
   border-radius: 99px;
-  filter: url(#doodle-border-filter);
 }
 
 /* Headings auto use display font */
@@ -145,29 +144,26 @@ h1, h2, h3, h4, h5, h6, .font-display-auto {
     );
   }
 
-  .doodle-effect {
-    filter: url(#doodle-border-filter);
-  }
+  /* Kept as a no-op hook: SVG filters on large surfaces make scrolling janky. */
+  .doodle-effect {}
   
   .doodle-card {
     background-color: var(--card-bg);
     border: 2.5px solid var(--border);
     border-radius: var(--doodle-radius);
-    filter: url(#doodle-border-filter);
-    box-shadow: 3.5px 4.5px 0 0 currentColor;
+    box-shadow: 3px 3px 0 0 currentColor;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
   .doodle-card:hover {
-    transform: translate(-1.5px, -2.5px);
-    box-shadow: 6px 7px 0 0 currentColor;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 currentColor;
   }
   
   .doodle-button {
     background-color: var(--card-bg);
     border: 2.5px solid var(--border);
     border-radius: var(--doodle-radius);
-    filter: url(#doodle-border-filter);
     box-shadow: 3px 3px 0 0 currentColor;
     transition: all 0.2s ease;
     display: inline-flex;
@@ -189,16 +185,73 @@ h1, h2, h3, h4, h5, h6, .font-display-auto {
     background-color: var(--card-bg);
     border: 2.5px solid var(--border);
     border-radius: var(--doodle-radius);
-    filter: url(#doodle-border-filter);
   }
   
   .glass-nav {
     background: var(--background);
     border-bottom: 2.5px solid var(--border);
-    filter: url(#doodle-border-filter);
   }
   
   .glow-text {
     text-shadow: none;
   }
+}
+
+
+/* ---------- Doodle motion ---------- */
+
+/* Pencil cursor; hotspot sits on the tip */
+body {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><path d='M3 25 L4.5 18 L19 3.5 L24.5 9 L10 23.5 Z' fill='%23fde68a' stroke='%231a1a1a' stroke-width='1.8' stroke-linejoin='round'/><path d='M16.5 6 L22 11.5' stroke='%231a1a1a' stroke-width='1.8'/><path d='M3 25 L4.5 18 L7 20.5 Z' fill='%231a1a1a'/></svg>") 3 25, auto;
+}
+a, button, [role="button"] {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><path d='M3 25 L4.5 18 L19 3.5 L24.5 9 L10 23.5 Z' fill='%23fca5a5' stroke='%231a1a1a' stroke-width='1.8' stroke-linejoin='round'/><path d='M16.5 6 L22 11.5' stroke='%231a1a1a' stroke-width='1.8'/><path d='M3 25 L4.5 18 L7 20.5 Z' fill='%231a1a1a'/></svg>") 3 25, pointer;
+}
+input[type="text"] { cursor: text; }
+
+/* "Boiling" line: cycles three noise seeds like frame-by-frame animation */
+@keyframes boil {
+  0%   { filter: url(#doodle-boil-1); }
+  33%  { filter: url(#doodle-boil-2); }
+  66%  { filter: url(#doodle-boil-3); }
+}
+@keyframes wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -9deg; }
+  60% { rotate: 8deg; }
+}
+@keyframes pop-out {
+  0%   { opacity: 1; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+}
+@keyframes scribble-in {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@layer utilities {
+  /* Small icons only: static wobble, "boiling" just while hovered. */
+  .doodle-ink {
+    filter: url(#doodle-border-filter);
+  }
+  .doodle-ink:hover {
+    animation: boil 0.45s steps(1) infinite, wiggle 0.6s ease-in-out;
+  }
+  .scribble-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: scribble-in 0.45s ease-out forwards;
+  }
+  .marker-underline {
+    background-image: linear-gradient(transparent 62%, color-mix(in srgb, #fde047 55%, transparent) 62%, color-mix(in srgb, #fde047 55%, transparent) 90%, transparent 90%);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 0.35s ease;
+  }
+  .marker-underline:hover { background-size: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doodle-ink:hover { animation: none; }
 }

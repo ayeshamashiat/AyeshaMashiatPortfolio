@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { ArrowRight } from "lucide-react";
@@ -10,9 +11,12 @@ import {
   DoodleMonitor,
   DoodleArrow,
 } from "@/components/ui/DoodleIcons";
-import { TerminalText } from "@/components/ui/TerminalText";
+import { InteractiveTerminal } from "@/components/ui/InteractiveTerminal";
+
+const GREETINGS = ["hi!", "hello!", "salaam!", "hola!", "ciao!", "yo!", "hey :)"];
 
 export function HeroSection() {
+  const [greeting, setGreeting] = useState(0);
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 overflow-hidden pt-24 pb-12">
       {/* Grid Pattern */}
@@ -21,7 +25,7 @@ export function HeroSection() {
       {/* Floating Doodles Background */}
       <motion.div
         animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 6, repeat: 0, ease: "easeInOut" }}
         className="absolute top-28 right-24 md:right-40 opacity-70 pointer-events-none"
       >
         <DoodleCloud size={60} arrow="down" />
@@ -29,18 +33,18 @@ export function HeroSection() {
 
       <motion.div
         animate={{ rotate: [0, 360] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        className="absolute top-48 left-12 md:left-24 opacity-60 pointer-events-none"
+        transition={{ duration: 18, repeat: 0, ease: "linear" }}
+        className="absolute top-48 left-12 md:left-24 opacity-60"
       >
-        <DoodleStar size={24} />
+        <motion.div drag dragSnapToOrigin whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.8 }} className="pointer-events-auto cursor-grab active:cursor-grabbing"><DoodleStar size={24} /></motion.div>
       </motion.div>
 
       <motion.div
         animate={{ y: [0, 8, 0], scale: [1, 1.08, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-32 right-1/3 opacity-55 pointer-events-none"
+        transition={{ duration: 4, repeat: 0, ease: "easeInOut" }}
+        className="absolute bottom-32 right-1/3 opacity-55"
       >
-        <DoodleStar size={30} />
+        <motion.div drag dragSnapToOrigin whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.8 }} className="pointer-events-auto cursor-grab active:cursor-grabbing"><DoodleStar size={30} /></motion.div>
       </motion.div>
 
       {/* Decorative Hand-drawn symbols */}
@@ -69,10 +73,18 @@ export function HeroSection() {
             {/* Float 'hi!' Speech Bubble near name */}
             <motion.div
               animate={{ y: [0, -6, 0], rotate: [-8, -4, -8] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-12 left-52 md:left-72 z-20 pointer-events-none"
+              transition={{ duration: 3.5, repeat: 0, ease: "easeInOut" }}
+              className="absolute -top-12 left-52 md:left-72 z-20"
             >
-              <DoodleSpeechBubble text="hi!" size={50} />
+              <button
+                type="button"
+                onClick={() => setGreeting((g) => (g + 1) % GREETINGS.length)}
+                aria-label="Change greeting"
+                title="click me!"
+                className="block hover:scale-110 active:scale-90 transition-transform"
+              >
+                <DoodleSpeechBubble text={GREETINGS[greeting]} size={50} />
+              </button>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4 leading-[1.05] text-foreground">
@@ -114,25 +126,14 @@ export function HeroSection() {
             {/* Pointing hand doodle pointing to projects */}
             <motion.div 
               animate={{ x: [0, 8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
+              transition={{ duration: 2.5, repeat: 0 }}
               className="absolute -left-12 bottom-12 hidden xl:block text-foreground opacity-60"
             >
               <DoodleArrow size={36} direction="right" />
             </motion.div>
 
             <DoodleMonitor className="w-full">
-              <div className="bg-[#151515] text-[#e5e5e0] p-4 font-mono text-[11px] sm:text-xs leading-relaxed h-[240px] overflow-y-auto space-y-2 select-text no-scrollbar border-[1.5px] border-foreground/30 rounded-md">
-                <div className="text-green-400 font-semibold">ayesha@iut-server:~$ npm run dev</div>
-                <div className="text-neutral-500">Ready in 380ms (Turbopack)</div>
-                <div className="text-cyan-400">▲ Next.js 16.2.6 (v4 compiler)</div>
-                <div className="text-neutral-400">- Local: http://localhost:3000</div>
-                <div className="text-neutral-500">◇ Connecting to PostgreSQL Pool...</div>
-                <div className="text-green-400">✓ DB connection successful. pool_size=15</div>
-                <div className="text-neutral-500">◇ Init tailored CV guidance engine (RAG)...</div>
-                <div className="text-green-400">✓ Vector DB and OpenAI client loaded.</div>
-                <div className="text-yellow-400">✦ System Ready. Monitoring webhooks...</div>
-                <TerminalText text="tail -f /var/log/syslog" delay={3.5} prefix="ayesha@iut-server:~$ " className="text-white" />
-              </div>
+              <InteractiveTerminal />
             </DoodleMonitor>
           </AnimatedSection>
         </div>

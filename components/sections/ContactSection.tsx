@@ -4,17 +4,18 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Mail, ArrowRight } from "lucide-react";
 import { DoodleBell, DoodleStar, DoodleSpeechBubble, DoodleArrow } from "@/components/ui/DoodleIcons";
 import { motion } from "framer-motion";
+import { DoodleTicTacToe } from "@/components/ui/DoodleTicTacToe";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-32 px-6 md:px-12 lg:px-24 border-t-2 border-foreground/30 relative overflow-hidden bg-background doodle-effect">
+    <section id="contact" className="py-32 px-6 md:px-12 lg:px-24 border-t-2 border-foreground/30 relative overflow-hidden bg-background">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
 
       {/* Floating doodles */}
       <motion.div
         animate={{ y: [0, -8, 0], rotate: [0, -8, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 4.5, repeat: 0, ease: "easeInOut" }}
         className="absolute top-20 left-16 opacity-30 pointer-events-none"
       >
         <DoodleBell size={32} />
@@ -22,7 +23,7 @@ export function ContactSection() {
 
       <motion.div
         animate={{ rotate: [0, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 20, repeat: 0, ease: "linear" }}
         className="absolute bottom-24 right-1/4 opacity-40 pointer-events-none"
       >
         <DoodleStar size={24} />
@@ -33,7 +34,7 @@ export function ContactSection() {
           {/* Float Speech Bubble above header */}
           <motion.div
             animate={{ y: [0, -4, 0], rotate: [6, 10, 6] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 3, repeat: 0, ease: "easeInOut" }}
             className="absolute -top-16 right-16 md:right-32 z-20 pointer-events-none"
           >
             <DoodleSpeechBubble text="Ping me!" size={58} />
@@ -49,7 +50,7 @@ export function ContactSection() {
         <AnimatedSection delay={0.2} className="relative flex flex-col items-center">
           {/* Hand pointing to send button */}
           <div className="absolute -left-12 top-1/2 -translate-y-1/2 hidden md:block opacity-40">
-            <DoodleArrow size={30} direction="right" className="animate-pulse" />
+            <DoodleArrow size={30} direction="right" />
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 w-full sm:w-auto">
@@ -93,7 +94,12 @@ export function ContactSection() {
         </AnimatedSection>
       </div>
       
-      <div className="mt-40 text-center text-xs tracking-wider text-muted-foreground font-light font-display">
+      <AnimatedSection className="mt-28 flex flex-col items-center gap-4 relative z-10">
+        <h3 className="text-2xl font-bold font-display">Bored? Beat me at tic-tac-toe</h3>
+        <DoodleTicTacToe />
+      </AnimatedSection>
+
+      <div className="mt-28 text-center text-xs tracking-wider text-muted-foreground font-light font-display">
         <p>© {new Date().getFullYear()} Ayesha Mashiat. All rights reserved.</p>
         <p className="mt-2 text-foreground/40 font-bold underline decoration-wavy underline-offset-4">Designed & Engineered with hand-drawn precision.</p>
       </div>

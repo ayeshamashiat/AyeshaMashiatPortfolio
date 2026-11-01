@@ -44,8 +44,8 @@ export function Preloader() {
               />
             </div>
             <div className="mt-3 flex justify-between text-[10px] text-muted-foreground tracking-[0.15em] uppercase font-normal">
-              <span>Systems Engineering</span>
-              <span>Intelligent Design</span>
+              <span>loading notes</span>
+              <span>sharpening pencils</span>
             </div>
           </div>
         </motion.div>

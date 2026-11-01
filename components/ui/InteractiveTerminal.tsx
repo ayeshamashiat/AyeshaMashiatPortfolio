@@ -22,10 +22,8 @@ const PROMPT = "ayesha@iut-server:~$ ";
 const BOOT: Line[] = [
   { text: `${PROMPT}npm run dev`, tone: "cmd" },
   { text: "Ready in 380ms (Turbopack)", tone: "dim" },
-  { text: "▲ Next.js 16.2.6", tone: "info" },
-  { text: "✓ DB connection successful. pool_size=15", tone: "ok" },
-  { text: "✓ Vector DB and OpenAI client loaded.", tone: "ok" },
-  { text: "✦ System ready. Type `help` to poke around.", tone: "warn" },
+  { text: "✓ FastAPI up · Postgres pool ready", tone: "ok" },
+  { text: "✦ System ready. try `help`.", tone: "warn" },
 ];
 
 const HELP: Line[] = [
@@ -80,12 +78,12 @@ export function InteractiveTerminal() {
         break;
       case "whoami":
         out = [
-          { text: "Ayesha Mashiat: backend dev & SWE student @ IUT.", tone: "out" },
-          { text: "REST APIs, auth, Postgres, and RAG tooling.", tone: "dim" },
+          { text: "Ayesha. backend dev, SWE student @ IUT.", tone: "out" },
+          { text: "lately: how AI actually works.", tone: "dim" },
         ];
         break;
       case "skills":
-        out = [{ text: "Node · FastAPI · PostgreSQL · Docker · AWS · LLM/RAG", tone: "out" }];
+        out = [{ text: "Python · FastAPI · Postgres · Docker · AWS · a little ML", tone: "out" }];
         break;
       case "projects":
         goto("projects");
@@ -144,7 +142,7 @@ export function InteractiveTerminal() {
       ref={scroller}
       data-no-doodle
       onClick={() => inputRef.current?.focus()}
-      className="bg-[#151515] text-[#e5e5e0] p-4 font-mono text-[11px] sm:text-xs leading-relaxed h-[240px] overflow-y-auto no-scrollbar border-[1.5px] border-foreground/30 rounded-md"
+      className="bg-[#151515] text-[#e5e5e0] p-4 font-mono text-[11px] sm:text-xs leading-relaxed h-[240px] overflow-y-auto no-scrollbar"
     >
       {lines.map((l, i) => (
         <div key={i} className={`whitespace-pre-wrap ${TONES[l.tone ?? "out"]}`}>

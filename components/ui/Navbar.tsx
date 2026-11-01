@@ -7,12 +7,11 @@ import { useTheme } from "next-themes";
 import { DoodleLightBulb } from "@/components/ui/DoodleIcons";
 
 const NAV_ITEMS = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
-  { name: "Achievements", href: "#achievements" },
-  { name: "Contact", href: "#contact" }
+  { name: "Cases", href: "#projects" },
+  { name: "Work", href: "#experience" },
+  { name: "ML", href: "#rabbit-hole" },
+  { name: "Writing", href: "#writing" },
+  { name: "Say hi", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -45,7 +44,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="relative flex items-center justify-between px-6 py-2.5 doodle-card shadow-sm transition-all">
           <a href="#" className="relative z-10 text-xl font-bold tracking-wide text-foreground hover:opacity-80 transition-opacity font-display">
-            Ayesha <span className="font-semibold text-primary underline decoration-wavy">Mashiat</span>
+            Ayesha <span className="underline decoration-wavy">Mashiat</span>
           </a>
 
           {/* Desktop Nav */}
@@ -75,7 +74,7 @@ export function Navbar() {
               href="#contact"
               className="doodle-button inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:scale-102 active:scale-98 transition-all duration-200 font-display"
             >
-              <span>Let's talk</span>
+              <span>Say hi</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -128,7 +127,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="inline-flex items-center gap-2 text-lg font-bold uppercase tracking-wider text-foreground hover:underline transition-colors font-display"
                 >
-                  <span>Get in Touch</span>
+                  <span>Say hi</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>

@@ -1,8 +1,10 @@
 import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { SkillsSection } from "@/components/sections/SkillsSection";
+import { RabbitHoleSection } from "@/components/sections/RabbitHoleSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { WritingSection } from "@/components/sections/WritingSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
+import { PokeballSection } from "@/components/sections/PokeballSection";
 import { AchievementsSection } from "@/components/sections/AchievementsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Preloader } from "@/components/ui/Preloader";
@@ -12,16 +14,18 @@ import { DrawingPad } from "@/components/ui/DrawingPad";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative selection:bg-white selection:text-black">
+    <main className="relative min-h-screen">
       <Preloader />
       <Navbar />
       <ClickDoodles />
       <DrawingPad />
       <HeroSection />
-      <AboutSection />
       <ProjectsSection />
-      <SkillsSection />
       <ExperienceSection />
+      <RabbitHoleSection />
+      <SkillsSection />
+      <WritingSection />
+      <PokeballSection />
       <AchievementsSection />
       <ContactSection />
     </main>

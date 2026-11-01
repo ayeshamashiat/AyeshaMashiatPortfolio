@@ -32,8 +32,8 @@ const patrickHand = Patrick_Hand({
 });
 
 export const metadata: Metadata = {
-  title: "Ayesha Mashiat | Backend & AI Systems",
-  description: "Personal portfolio of Ayesha Mashiat, a backend engineer building intelligent systems.",
+  title: "Ayesha Mashiat | Backend developer",
+  description: "Ayesha Mashiat builds backend software and is curious about how AI actually works. Projects: Bouncer, Touch Grass Babu, PetniHunter, AgriSense.",
 };
 
 export default function RootLayout({

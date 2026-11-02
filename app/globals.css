@@ -45,7 +45,7 @@
   --color-accent: var(--accent);
   --color-card-bg: var(--card-bg);
   --color-card-border: var(--card-border);
-  --font-sans: var(--font-body), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-readable), var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-heading), cursive, var(--font-sans);
 }
 
@@ -59,7 +59,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  font-family: var(--font-body);
+  font-family: var(--font-readable), var(--font-body), cursive;
   position: relative;
 }
 
@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6, .font-display-auto {
 /* Custom utilities */
 @layer utilities {
   .font-readable {
-    font-family: var(--font-readable), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-readable), var(--font-body), cursive;
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;

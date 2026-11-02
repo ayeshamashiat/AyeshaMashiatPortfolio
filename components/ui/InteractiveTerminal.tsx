@@ -33,7 +33,7 @@ const HELP: Line[] = [
   { text: "projects  jump to my work", tone: "out" },
   { text: "contact   say hello", tone: "out" },
   { text: "theme     flip light / dark", tone: "out" },
-  { text: "tea       essential fuel", tone: "out" },
+  { text: "tea       my lebu-cha recipe", tone: "out" },
   { text: "clear     wipe the screen", tone: "out" },
 ];
 
@@ -44,6 +44,15 @@ const TEA = [
   "  |      |]",
   "  \\      /",
   "   `----'",
+];
+
+const RECIPE = [
+  "1 cup water",
+  "1½ spoons sugar / honey",
+  "1 cardamom",
+  "a pinch of cinnamon",
+  "a handful of mint",
+  "some squeezed lime",
 ];
 
 /** A tiny fake shell that lets visitors explore the portfolio by typing. */
@@ -100,8 +109,19 @@ export function InteractiveTerminal() {
         break;
       }
       case "tea":
+      case "cha":
+      case "lebu-cha":
+        out = [
+          { text: "lebu-cha", tone: "warn" as const },
+          ...RECIPE.map((r) => ({ text: `– ${r}`, tone: "out" as const })),
+          { text: "" },
+          { text: "kettle's on. everything else can wait.", tone: "dim" as const },
+          ...TEA.map((t) => ({ text: t, tone: "warn" as const })),
+          { text: "ahh. productivity restored.", tone: "dim" as const },
+        ];
+        break;
       case "coffee":
-        out = [...TEA.map((t) => ({ text: t, tone: "warn" as const })), { text: cmd === "coffee" ? "…it's tea. always tea." : "ahh. productivity restored.", tone: "dim" }];
+        out = [{ text: "…did you mean `tea`?", tone: "warn" }];
         break;
       case "sudo":
       case "sudo rm -rf /":

@@ -6,10 +6,11 @@ import { ArrowDown } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { DoodleSpeechBubble, DoodleStar } from "@/components/ui/DoodleIcons";
 import { Workbench } from "@/components/ui/Workbench";
+import { CvButton } from "@/components/ui/CvButton";
 
 const GREETINGS = ["hi!", "hello!", "salaam!", "hola!", "ciao!", "hey :)"];
 
-export function HeroSection() {
+export function HeroSection({ hasCv = false }: { hasCv?: boolean }) {
   const [greeting, setGreeting] = useState(0);
 
   return (
@@ -38,32 +39,29 @@ export function HeroSection() {
 
           <AnimatedSection delay={0.2}>
             <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
-              Backend by trade.
-              <br />
-              <span className="underline decoration-wavy decoration-[3px] underline-offset-[10px]">Curious</span> by default.
+              Hi, I&apos;m <span className="underline decoration-wavy decoration-[3px] underline-offset-[10px]">Ayesha Mashiat</span>
             </h1>
+            <p className="mt-4 font-display text-xl font-bold md:text-2xl">Backend developer &amp; Software Engineering student</p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.3}>
-            <p className="max-w-lg text-lg leading-relaxed text-muted-foreground md:text-xl">
-              I&apos;m Ayesha. I design the APIs, schemas and auth that quietly hold products up, and I keep pulling on the thread of
-              how AI really works. Sometimes the two meet and I ship something odd.
+            <p className="font-readable max-w-lg text-lg leading-relaxed text-muted-foreground md:text-xl">
+              I&apos;m a third-year at IUT in Dhaka who loves the invisible parts of software: APIs, databases and auth that quietly hold
+              everything up. I also tinker with AI on the side, run on far too much cha, and keep about seventeen tabs open at all times.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.4}>
             <div className="flex flex-wrap items-center gap-4">
               <a href="#projects" className="doodle-button gap-2 px-6 py-3 font-display font-bold">
-                Open the case files <ArrowDown className="h-4 w-4" />
+                View my projects <ArrowDown className="h-4 w-4" />
               </a>
+              {hasCv && <CvButton />}
               <a href="#contact" className="font-display font-bold underline decoration-wavy underline-offset-4 hover:decoration-2">
-                or just say hi
+                or get in touch
               </a>
             </div>
-            <p className="mt-6 font-mono text-xs text-muted-foreground">
-              Dhaka · SWE @ IUT · internship @ Reddot Digital
-            </p>
-          </AnimatedSection>
+                    </AnimatedSection>
         </div>
 
         <AnimatedSection delay={0.35} className="lg:col-span-6">

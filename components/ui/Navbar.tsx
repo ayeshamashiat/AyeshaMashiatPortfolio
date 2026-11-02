@@ -7,11 +7,11 @@ import { useTheme } from "next-themes";
 import { DoodleLightBulb } from "@/components/ui/DoodleIcons";
 
 const NAV_ITEMS = [
-  { name: "Cases", href: "#projects" },
-  { name: "Work", href: "#experience" },
-  { name: "ML", href: "#rabbit-hole" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#toolbox" },
   { name: "Writing", href: "#writing" },
-  { name: "Say hi", href: "#contact" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -74,7 +74,7 @@ export function Navbar() {
               href="#contact"
               className="doodle-button inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground hover:scale-102 active:scale-98 transition-all duration-200 font-display"
             >
-              <span>Say hi</span>
+              <span>Contact</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -127,7 +127,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="inline-flex items-center gap-2 text-lg font-bold uppercase tracking-wider text-foreground hover:underline transition-colors font-display"
                 >
-                  <span>Say hi</span>
+                  <span>Contact</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>

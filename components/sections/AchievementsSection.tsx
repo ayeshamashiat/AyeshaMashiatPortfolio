@@ -13,7 +13,7 @@ export function AchievementsSection() {
   return (
     <section id="status" className="border-y-2 border-foreground/15 bg-card-bg/20">
       <div className="mx-auto max-w-5xl px-6 py-28 md:px-12">
-        <SectionHeading index="07" title="Hackathon log" kicker="Under-slept weekends that ended on a stage. Tap a ticket to flip it." />
+        <SectionHeading index="05" title="Hackathons" />
 
         <div className="grid gap-6 sm:grid-cols-2">
           {PODIUM.map((p, i) => (

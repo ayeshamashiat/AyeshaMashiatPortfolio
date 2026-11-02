@@ -108,6 +108,9 @@ h1, h2, h3, h4, h5, h6, .font-display-auto {
 
 /* Custom utilities */
 @layer utilities {
+  .font-readable {
+    font-family: var(--font-readable), ui-sans-serif, system-ui, sans-serif;
+  }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -179,6 +182,11 @@ h1, h2, h3, h4, h5, h6, .font-display-auto {
   .doodle-button:active {
     transform: translate(1.5px, 1.5px);
     box-shadow: 1px 1px 0 0 currentColor;
+  }
+
+  .doodle-button.doodle-button-solid {
+    background-color: var(--foreground);
+    color: var(--background);
   }
 
   .glass-card {

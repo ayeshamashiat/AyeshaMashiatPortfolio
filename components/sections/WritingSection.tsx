@@ -26,7 +26,7 @@ export async function WritingSection() {
 
   return (
     <section id="writing" className="mx-auto max-w-6xl px-6 py-28 md:px-12 lg:px-24">
-      <SectionHeading index="05" title="Postmortems & field notes" kicker="After a project ships I write down what actually happened, including the parts that didn't go to plan." />
+      <SectionHeading index="04" title="Technical Writing" />
 
       <div className="grid gap-6 md:grid-cols-3">
         {posts.slice(0, 3).map((p, i) => (

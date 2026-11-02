@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Caveat, Comic_Neue, Architects_Daughter, Patrick_Hand } from "next/font/google";
+import { Inter, JetBrains_Mono, Caveat, Comic_Neue, Architects_Daughter, Patrick_Hand, Nunito } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
@@ -25,6 +25,11 @@ const architectsDaughter = Architects_Daughter({
   weight: ["400"],
 });
 
+const nunito = Nunito({
+  variable: "--font-readable",
+  subsets: ["latin"],
+});
+
 const patrickHand = Patrick_Hand({
   variable: "--font-body",
   subsets: ["latin"],
@@ -44,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} ${architectsDaughter.variable} ${patrickHand.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} ${architectsDaughter.variable} ${patrickHand.variable} ${nunito.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300">

@@ -9,23 +9,21 @@ import { OLDER_WORK, PROJECTS } from "@/lib/content";
 export function ProjectsSection() {
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-28 md:px-12 lg:px-24">
-      <SectionHeading index="01" title="Case files" kicker="I treat side projects like investigations: find the itch, build the trick, keep the receipt." />
+      <SectionHeading index="01" title="Projects" />
 
       <div className="grid gap-10 md:grid-cols-2">
         {PROJECTS.map((p, i) => (
           <AnimatedSection key={p.id} delay={(i % 2) * 0.1}>
             <article className="doodle-card flex h-full flex-col p-6 md:p-7">
-              <span className="font-mono text-xs text-muted-foreground">file {p.id}</span>
               <h3 className="mt-1 text-2xl font-bold md:text-3xl">{p.title}</h3>
-              <p className="font-display text-muted-foreground">{p.tagline}</p>
 
-              <dl className="mt-5 space-y-3 text-sm leading-relaxed">
+              <dl className="font-readable mt-5 space-y-3 text-sm leading-relaxed">
                 <div>
-                  <dt className="font-display font-bold underline decoration-wavy decoration-1 underline-offset-4">the itch</dt>
+                  <dt className="font-display font-bold underline decoration-wavy decoration-1 underline-offset-4">problem</dt>
                   <dd className="mt-1 text-muted-foreground">{p.itch}</dd>
                 </div>
                 <div>
-                  <dt className="font-display font-bold underline decoration-wavy decoration-1 underline-offset-4">the trick</dt>
+                  <dt className="font-display font-bold underline decoration-wavy decoration-1 underline-offset-4">solution</dt>
                   <dd className="mt-1 text-muted-foreground">{p.trick}</dd>
                 </div>
               </dl>
@@ -61,7 +59,7 @@ export function ProjectsSection() {
       </div>
 
       <AnimatedSection className="mt-14">
-        <h3 className="mb-4 font-mono text-xs text-muted-foreground">cold cases (older work)</h3>
+        <h3 className="mb-4 font-mono text-xs text-muted-foreground">older projects</h3>
         <ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
           {OLDER_WORK.map((w) => (
             <li key={w.name}>

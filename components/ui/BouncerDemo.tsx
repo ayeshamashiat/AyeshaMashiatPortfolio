@@ -26,7 +26,7 @@ export function BouncerDemo() {
 
   return (
     <div data-no-doodle className="mt-5 border-t-2 border-dashed border-foreground/20 pt-4">
-      <p className="mb-2 font-mono text-[11px] text-muted-foreground">try it: pick a skill to install</p>
+      <p className="mb-2 font-mono text-[11px] text-muted-foreground">pick a skill to install</p>
       <div className="flex flex-wrap gap-2">
         {SKILLS.map((s, i) => (
           <button

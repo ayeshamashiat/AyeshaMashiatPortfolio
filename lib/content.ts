@@ -70,7 +70,6 @@ export const OLDER_WORK = [
   { name: "Jobscape", note: "recruitment backend", href: "https://github.com/ayeshamashiat/Jobscape_Backend" },
   { name: "PAMS", note: "thesis workflow, RBAC", href: "https://github.com/ayeshamashiat/PAMS_Backend" },
   { name: "Portfolio Auditor", note: "audits GitHub profiles", href: "https://ai-powered-portfolio-auditor.vercel.app" },
-  { name: "AlgoVisualizer", note: "algorithms, step by step", href: "https://algo-visualizer-green.vercel.app" },
   { name: "CalorieAdventure", note: "a JavaFX cat game", href: "https://github.com/ayeshamashiat/CalorieAdventureGame" },
 ];
 
@@ -78,32 +77,32 @@ export interface Role {
   org: string;
   role: string;
   kind: "internship" | "education";
-  summary: string;
+  when: string;
+  where: string;
+  bullets: string[];
 }
 
-// Only verified facts here. Add dates / responsibilities once confirmed.
+// Sourced from the CV in /public.
 export const EXPERIENCE: Role[] = [
   {
-    org: "Reddot Digital",
-    role: "Internship",
+    org: "RedDot Digital Limited",
+    role: "Software Engineering Intern",
     kind: "internship",
-    summary: "My first step from coursework into an industry team.",
+    when: "Sep 2026 – Present",
+    where: "Dhaka",
+    bullets: [
+      "Interning in the ESD Division, contributing to the Smart ECRM project for Smart Cambodia.",
+      "Gaining hands-on experience in software engineering and real-world business applications under a Lead Software Engineer.",
+    ],
   },
   {
     org: "Islamic University of Technology",
     role: "B.Sc. in Software Engineering",
     kind: "education",
-    summary: "Third year. Databases, system design and distributed systems by day; side projects by night.",
+    when: "Expected 2027",
+    where: "Gazipur",
+    bullets: [],
   },
-];
-
-export type StepState = "done" | "doing" | "next";
-export const LEARNING_PATH: { label: string; state: StepState; note: string }[] = [
-  { label: "linear regression", state: "done", note: "a line through dots. the gentlest start." },
-  { label: "gradient descent", state: "doing", note: "how a model walks downhill. toy below." },
-  { label: "classification", state: "doing", note: "drawing borders between things." },
-  { label: "neural networks", state: "next", note: "stacking all of the above." },
-  { label: "RAG & agents", state: "next", note: "where it meets my backend habits." },
 ];
 
 export const TOOLBOX = [
@@ -117,10 +116,13 @@ export const TOOLBOX = [
 
 export const PODIUM = [
   { place: "Top 100", event: "Solvio AI Hackathon", year: "2025", note: "Team #336", cert: "/resources/Achievement/SOLVIO_Top100_Certificate_Team_336.png" },
-  { place: "Finalist", event: "CodeSprint, Inter-IUT", year: "", note: "top 14 of 50 finalists" },
-  { place: "Finalist", event: "SUST CSE Carnival", year: "", note: "top 50 of 450+ submissions" },
-  { place: "Finalist", event: "IUT 12th ICT Fest: Agentic AI", year: "", note: "top 20 of 700+ submissions" },
+  { place: "Finalist", event: "CodeSprint Inter-University Hackathon", year: "2026", note: "top 14 of 50 finalists" },
+  { place: "Finalist", event: "SUST CSE Carnival Codex Community Hackathon", year: "2026", note: "top 50 of 450+ submissions" },
+  { place: "Finalist", event: "IUT 12th ICT Fest", year: "2026", note: "top 20 of 700+ submissions" },
 ];
+
+// Set to a public address to enable the "send by email" option on the contact card.
+export const CONTACT_EMAIL = "ayesha.mashiat019@gmail.com";
 
 export const STARTERS = [
   "How would you stop a malicious AI skill from ever being installed?",

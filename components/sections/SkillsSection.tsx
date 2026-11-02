@@ -21,19 +21,11 @@ export function SkillsSection() {
   return (
     <section id="toolbox" className="mx-auto max-w-6xl px-6 py-28 md:px-12 lg:px-24">
       <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <SectionHeading index="04" title="Toolbox" />
+        <SectionHeading index="03" title="Skills" />
         <AnimatedSection className="mb-14 w-full max-w-[260px] md:mb-14">
           <DoodleSearch value={query} onChange={setQuery} placeholder="Search tools..." />
         </AnimatedSection>
       </div>
-
-      <p className="-mt-8 mb-10 font-display text-sm text-muted-foreground">
-        {circled.size === 0
-          ? "psst: tap anything to circle it ✎"
-          : circled.size < 5
-            ? `${circled.size} circled, keep going…`
-            : <>{circled.size} circled: great taste. <a href="#contact" className="text-foreground underline decoration-wavy">let&apos;s talk</a></>}
-      </p>
 
       <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {TOOLBOX.map((group, gi) => (

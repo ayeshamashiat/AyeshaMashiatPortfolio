@@ -1,41 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Caveat, Comic_Neue, Architects_Daughter, Patrick_Hand } from "next/font/google";
+import { JetBrains_Mono, Playfair_Display, Source_Serif_4, Noto_Serif_Bengali, Source_Sans_3, Noto_Sans_Bengali } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LangProvider } from "@/lib/i18n";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
-
-const caveat = Caveat({
-  variable: "--font-cursive",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
-
-const architectsDaughter = Architects_Daughter({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-const comicNeue = Comic_Neue({
-  variable: "--font-readable",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const patrickHand = Patrick_Hand({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400"],
-});
+// Newspaper type: a high-contrast serif for headlines, a text serif for body copy,
+// and Noto Serif Bengali picks up the Bengali glyphs in both.
+const headline = Playfair_Display({ variable: "--font-heading", subsets: ["latin"] });
+const text = Source_Serif_4({ variable: "--font-body", subsets: ["latin"], style: ["normal", "italic"] });
+const bengali = Noto_Serif_Bengali({ variable: "--font-bn", subsets: ["bengali"] });
+// Clean sans for section labels, the date strip and buttons, like a daily's navigation.
+const ui = Source_Sans_3({ variable: "--font-ui", subsets: ["latin"] });
+const uiBengali = Noto_Sans_Bengali({ variable: "--font-ui-bn", subsets: ["bengali"] });
+const jetbrainsMono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ayesha Mashiat | Backend developer",
@@ -50,30 +27,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} ${architectsDaughter.variable} ${patrickHand.variable} ${comicNeue.variable} h-full antialiased`}
+      className={`${headline.variable} ${text.variable} ${bengali.variable} ${ui.variable} ${uiBengali.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-[var(--yellow)] selection:text-[#1a1a1a]">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <LangProvider>{children}</LangProvider>
         </ThemeProvider>
         
-        {/* Inline SVG filters for wobbly hand-drawn effect */}
-        <svg style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }} xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="doodle-border-filter" x="-8%" y="-8%" width="116%" height="116%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="2" result="noise" />
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-            {/* Three seeds swapped in quick succession give lines the "boiling" hand-drawn jitter */}
-            {[3, 11, 27].map((seed, i) => (
-              <filter key={seed} id={`doodle-boil-${i + 1}`} x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed={seed} result="noise" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G" />
-              </filter>
-            ))}
-          </defs>
-        </svg>
       </body>
     </html>
   );

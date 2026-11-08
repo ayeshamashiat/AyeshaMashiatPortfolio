@@ -31,7 +31,7 @@ export function CvButton({ className = "" }: { className?: string }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          data-no-doodle
+         
           role="dialog"
           aria-modal="true"
           aria-label="Curriculum vitae"
@@ -41,14 +41,14 @@ export function CvButton({ className = "" }: { className?: string }) {
           onClick={() => setOpen(false)}
           className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-3 md:p-8"
         >
-          <div onClick={(e) => e.stopPropagation()} className="doodle-card flex h-full w-full max-w-4xl flex-col overflow-hidden">
+          <div onClick={(e) => e.stopPropagation()} className="panel flex h-full w-full max-w-4xl flex-col overflow-hidden">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b-[2.5px] border-foreground px-4 py-3 font-display">
               <span className="font-bold">Ayesha Mashiat: CV</span>
               <div className="flex items-center gap-4 text-sm font-bold">
-                <a href={CV_PATH} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:underline hover:decoration-wavy">
+                <a href={CV_PATH} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:underline hover:decoration-2">
                   <ExternalLink className="h-4 w-4" /> open in tab
                 </a>
-                <a href={CV_PATH} download="AyeshaMashiatResume.pdf" className="inline-flex items-center gap-1 hover:underline hover:decoration-wavy">
+                <a href={CV_PATH} download="AyeshaMashiatResume.pdf" className="inline-flex items-center gap-1 hover:underline hover:decoration-2">
                   <Download className="h-4 w-4" /> download
                 </a>
                 <button onClick={() => setOpen(false)} aria-label="Close CV">
@@ -59,7 +59,7 @@ export function CvButton({ className = "" }: { className?: string }) {
             <object data={`${CV_PATH}#view=FitH`} type="application/pdf" className="min-h-0 w-full flex-1 bg-white">
               <p className="p-6 font-display">
                 Your browser can&apos;t show PDFs inline.{" "}
-                <a href={CV_PATH} download="AyeshaMashiatResume.pdf" className="underline decoration-wavy">Download the CV</a> instead.
+                <a href={CV_PATH} download="AyeshaMashiatResume.pdf" className="underline decoration-2">Download the CV</a> instead.
               </p>
             </object>
           </div>
@@ -70,7 +70,7 @@ export function CvButton({ className = "" }: { className?: string }) {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className={`doodle-button gap-2 px-5 py-2.5 font-display font-bold ${className}`}>
+      <button onClick={() => setOpen(true)} className={`btn gap-2 px-5 py-3 text-sm uppercase tracking-wider ${className}`}>
         <FileText className="h-4 w-4" /> View CV
       </button>
       {inBrowser && createPortal(dialog, document.body)}

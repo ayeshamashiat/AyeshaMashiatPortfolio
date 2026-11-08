@@ -5,8 +5,8 @@ import { ArrowUpRight, Dices, Mail } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CvButton } from "@/components/ui/CvButton";
-import { DoodleTicTacToe } from "@/components/ui/DoodleTicTacToe";
 import { CONTACT_EMAIL, LINKS, STARTERS } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 
 const SOCIALS = [
   { name: "GitHub", href: LINKS.github },
@@ -16,6 +16,7 @@ const SOCIALS = [
 ];
 
 export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
+  const { t } = useLang();
   const [starter, setStarter] = useState(0);
   const [name, setName] = useState("");
   const [message, setMessage] = useState(STARTERS[0]);
@@ -44,15 +45,15 @@ export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
   const mailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Hello from your portfolio")}&body=${encodeURIComponent(fullMessage())}`;
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 pb-16 pt-28 md:px-12 lg:px-24">
-      <SectionHeading index="06" title="Contact" />
+    <section id="contact" className="mx-auto max-w-6xl px-6 pb-16 pt-16 md:px-12 lg:px-24">
+      <SectionHeading index="07" title="Contact" bn="যোগাযোগ" />
 
-      <div className="grid items-start gap-14 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-2">
         <AnimatedSection>
-          <div data-no-doodle className="doodle-card space-y-4 p-6">
+          <div className="panel space-y-4 p-6">
             <div className="flex items-center justify-between">
-              <h3 className="font-display text-lg font-bold">Send me a message</h3>
-              <button onClick={shuffle} className="inline-flex items-center gap-1.5 font-display text-sm underline decoration-wavy underline-offset-4" aria-label="Try a different conversation starter">
+              <h3 className="font-display text-xl font-black">{t("Letters to the editor", "সম্পাদকের নিকট চিঠি")}</h3>
+              <button onClick={shuffle} className="inline-flex items-center gap-1.5 font-display text-sm underline decoration-2 underline-offset-4" aria-label="Try a different conversation starter">
                 <Dices className="h-4 w-4" /> new starter
               </button>
             </div>
@@ -64,8 +65,7 @@ export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="optional"
-                className="mt-1 w-full border-2 border-foreground/40 bg-background px-3 py-2 outline-none focus:border-foreground"
-                style={{ borderRadius: "8px 3px 8px 3px" }}
+                className="mt-1 w-full border border-foreground bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--red)]"
               />
             </label>
 
@@ -78,17 +78,16 @@ export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
                   setStatus("");
                 }}
                 rows={4}
-                className="mt-1 w-full resize-none border-2 border-foreground/40 bg-background px-3 py-2 outline-none focus:border-foreground"
-                style={{ borderRadius: "8px 3px 8px 3px" }}
+                className="mt-1 w-full resize-none border border-foreground bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--red)]"
               />
             </label>
 
             <div className="flex flex-wrap items-center gap-3">
-              <button onClick={sendLinkedIn} disabled={!message.trim()} className="doodle-button doodle-button-solid gap-1.5 px-5 py-2.5 font-display font-bold disabled:opacity-40">
+              <button onClick={sendLinkedIn} disabled={!message.trim()} className="btn btn-solid gap-1.5 px-5 py-2.5 text-sm uppercase tracking-wider disabled:opacity-40">
                 Send via LinkedIn <ArrowUpRight className="h-4 w-4" />
               </button>
               {CONTACT_EMAIL && (
-                <a href={mailHref} className="doodle-button gap-1.5 px-5 py-2.5 font-display font-bold">
+                <a href={mailHref} className="btn gap-1.5 px-5 py-2.5 text-sm uppercase tracking-wider">
                   <Mail className="h-4 w-4" /> Send via email
                 </a>
               )}
@@ -100,19 +99,20 @@ export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
             )}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            {hasCv && <CvButton />}
-            {SOCIALS.map((s) => (
-              <a key={s.name} href={s.href} target="_blank" rel="noreferrer" className="doodle-button gap-1.5 px-5 py-2.5 font-display font-bold">
-                {s.name} <ArrowUpRight className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.15} className="flex flex-col items-center gap-3">
-          <h3 className="font-display text-xl font-bold">Tic-tac-toe</h3>
-          <DoodleTicTacToe />
+        <AnimatedSection delay={0.15}>
+          <h3 className="kicker mb-2 border-b border-foreground pb-2">{t("Elsewhere", "অন্যত্র")}</h3>
+          {hasCv && <div className="mb-3 mt-3"><CvButton /></div>}
+          <ul>
+            {SOCIALS.map((s) => (
+              <li key={s.name}>
+                <a href={s.href} target="_blank" rel="noreferrer" className="flex items-center justify-between border-b border-foreground/40 py-3 font-display text-xl font-bold hover:text-[var(--red)]">
+                  {s.name} <ArrowUpRight className="h-5 w-5" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </AnimatedSection>
       </div>
 

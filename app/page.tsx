@@ -1,33 +1,35 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { LatelySection } from "@/components/sections/LatelySection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { WritingSection } from "@/components/sections/WritingSection";
+import { JourneySection } from "@/components/sections/JourneySection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
-import { AchievementsSection } from "@/components/sections/AchievementsSection";
+import { WritingSection } from "@/components/sections/WritingSection";
+import { PuzzlesSection } from "@/components/sections/PuzzlesSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { Preloader } from "@/components/ui/Preloader";
 import { Navbar } from "@/components/ui/Navbar";
-import { ClickDoodles } from "@/components/ui/ClickDoodles";
-import { DrawingPad } from "@/components/ui/DrawingPad";
+import { NewsTicker } from "@/components/ui/NewsTicker";
+import { getArrivals } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
   // The CV button only shows once the PDF is actually in /public.
   const hasCv = existsSync(join(process.cwd(), "public", "AyeshaMashiatResume.pdf"));
+  const arrivals = await getArrivals();
 
   return (
     <main className="relative min-h-screen">
-      <Preloader />
-      <Navbar />
-      <ClickDoodles />
-      <DrawingPad />
+      <Navbar hasCv={hasCv} />
+      <div className="px-6 pt-4 md:px-12 lg:px-24">
+        <NewsTicker arrivals={arrivals} />
+      </div>
       <HeroSection hasCv={hasCv} />
+      <LatelySection arrivals={arrivals} />
       <ProjectsSection />
-      <ExperienceSection />
+      <JourneySection />
       <SkillsSection />
       <WritingSection />
-      <AchievementsSection />
+      <PuzzlesSection />
       <ContactSection hasCv={hasCv} />
     </main>
   );

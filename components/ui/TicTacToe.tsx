@@ -40,7 +40,7 @@ function aiMove(b: Cell[]): number {
 const CELL = 60;
 const centre = (i: number): [number, number] => [(i % 3) * CELL + CELL / 2 + 10, Math.floor(i / 3) * CELL + CELL / 2 + 10];
 
-export function DoodleTicTacToe() {
+export function TicTacToe() {
   const [board, setBoard] = useState<Cell[]>(Array(9).fill(null));
   const [score, setScore] = useState({ you: 0, me: 0, ties: 0 });
 
@@ -72,13 +72,9 @@ export function DoodleTicTacToe() {
     : full ? "a draw. respectable." : "your turn: you're X";
 
   return (
-    <div data-no-doodle className="flex flex-col items-center gap-3 font-display text-foreground">
-      <svg viewBox="0 0 200 200" className="w-52 h-52 doodle-ink" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-        {/* hand-drawn grid */}
-        <path d="M72 12 C70 70, 74 130, 71 188" />
-        <path d="M132 10 C134 70, 129 128, 131 190" />
-        <path d="M12 71 C70 68, 130 73, 188 70" />
-        <path d="M10 131 C70 134, 128 129, 190 132" />
+    <div className="flex flex-col items-center gap-3 text-foreground">
+      <svg viewBox="0 0 200 200" className="w-52 h-52" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M70 12 V188 M130 12 V188 M12 70 H188 M12 130 H188" />
 
         {board.map((cell, i) => {
           const [cx, cy] = centre(i);
@@ -91,8 +87,10 @@ export function DoodleTicTacToe() {
                 </>
               )}
               {cell === "O" && (
-                <motion.path
-                  d={`M${cx} ${cy - 17} C${cx + 22} ${cy - 17}, ${cx + 20} ${cy + 18}, ${cx - 2} ${cy + 17} C${cx - 22} ${cy + 15}, ${cx - 19} ${cy - 18}, ${cx + 3} ${cy - 19}`}
+                <motion.circle
+                  cx={cx}
+                  cy={cy}
+                  r={17}
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 0.35 }}
@@ -113,7 +111,7 @@ export function DoodleTicTacToe() {
           );
         })}
 
-        {/* scribbled strike-through on a win */}
+        {/* strike-through on a win */}
         {result && (
           <motion.path
             d={`M${centre(result.line[0]).join(" ")} L${centre(result.line[2]).join(" ")}`}
@@ -132,7 +130,7 @@ export function DoodleTicTacToe() {
         <span>me {score.me}</span>
         <span>draws {score.ties}</span>
         {over && (
-          <button onClick={() => setBoard(Array(9).fill(null))} className="doodle-button px-3 py-1 text-foreground font-bold">
+          <button onClick={() => setBoard(Array(9).fill(null))} className="btn px-3 py-1 text-foreground font-bold">
             play again
           </button>
         )}

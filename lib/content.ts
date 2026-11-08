@@ -132,3 +132,32 @@ export const STARTERS = [
   "Which niche fact are you annoyingly proud of knowing?",
   "Teach me one thing about databases I'll still remember next week.",
 ];
+
+export type JourneyKind = "study" | "hackathon" | "work";
+
+export interface JourneyStop {
+  id: string;
+  kind: JourneyKind;
+  when: string;
+  title: string;
+  detail: string;
+  cert?: string;
+  current?: boolean;
+}
+
+/** Education, hackathons and work on one line, oldest first. From the CV in /public. */
+export const JOURNEY: JourneyStop[] = [
+  { id: "iut", kind: "study", when: "2023 – 2027 (expected)", title: "Islamic University of Technology", detail: "B.Sc. in Software Engineering." },
+  { id: "solvio", kind: "hackathon", when: "2025", title: "Solvio AI Hackathon", detail: "Top 100 teams, Phase 2 qualifier.", cert: "/resources/Achievement/SOLVIO_Top100_Certificate_Team_336.png" },
+  { id: "ictfest", kind: "hackathon", when: "2026", title: "IUT 12th ICT Fest", detail: "Finalist: top 20 of 700+ teams." },
+  { id: "codesprint", kind: "hackathon", when: "2026", title: "CodeSprint Inter-University Hackathon", detail: "Finalist: top 14 of 50 teams." },
+  { id: "sust", kind: "hackathon", when: "2026", title: "SUST CSE Carnival Codex Community Hackathon", detail: "Finalist: top 50 of 450+ teams." },
+  {
+    id: "reddot",
+    kind: "work",
+    when: "Sep 2026 – Present",
+    title: "RedDot Digital Limited",
+    detail: "Software Engineering Intern in the ESD Division, on the Smart ECRM project for Smart Cambodia, under a Lead Software Engineer.",
+    current: true,
+  },
+];

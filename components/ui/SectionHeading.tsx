@@ -1,12 +1,20 @@
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
+"use client";
 
-export function SectionHeading({ index, title }: { index: string; title: string }) {
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { bnNum, useLang } from "@/lib/i18n";
+
+/** Section opener: heavy rule, a small red kicker with the section number, then the headline. */
+export function SectionHeading({ index, title, bn }: { index: string; title: string; bn: string }) {
+  const { lang, t } = useLang();
   return (
-    <AnimatedSection className="mb-14 max-w-2xl">
-      <span className="font-mono text-xs text-muted-foreground">{index}</span>
-      <h2 className="mt-2 text-3xl md:text-5xl font-bold tracking-tight font-display">
-        <span className="underline decoration-wavy decoration-2 underline-offset-8 decoration-foreground/40">{title}</span>
-      </h2>
+    <AnimatedSection className="mb-10">
+      <div className="rule-thick pt-2">
+        <p className="kicker">
+          {t("Section", "বিভাগ")} {lang === "bn" ? bnNum(index) : index}
+        </p>
+        <h2 className="mt-1 text-4xl font-black tracking-tight md:text-6xl">{t(title, bn)}</h2>
+        <div className="mt-3 border-b border-foreground" />
+      </div>
     </AnimatedSection>
   );
 }

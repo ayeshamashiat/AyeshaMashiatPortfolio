@@ -25,7 +25,7 @@ export function BouncerDemo() {
   const nodes = ["skill", ...skill.path];
 
   return (
-    <div data-no-doodle className="mt-5 border-t-2 border-dashed border-foreground/20 pt-4">
+    <div className="mt-5 border-t-2 border-dashed border-foreground/20 pt-4">
       <p className="mb-2 font-mono text-[11px] text-muted-foreground">pick a skill to install</p>
       <div className="flex flex-wrap gap-2">
         {SKILLS.map((s, i) => (
@@ -33,7 +33,7 @@ export function BouncerDemo() {
             key={s.name}
             onClick={() => setPicked(i)}
             aria-pressed={picked === i}
-            className={`rounded-full border-2 px-3 py-1 font-mono text-[11px] transition-colors ${
+            className={`border-2 px-3 py-1 font-mono text-[11px] transition-colors ${
               picked === i ? "border-foreground bg-foreground text-background" : "border-foreground/30 hover:border-foreground"
             }`}
           >
@@ -51,7 +51,7 @@ export function BouncerDemo() {
             transition={{ delay: i * 0.18 }}
             className="flex items-center"
           >
-            <span className="rounded border-2 border-foreground/60 px-2 py-0.5">{n}</span>
+            <span className="border-2 border-foreground/60 px-2 py-0.5">{n}</span>
             {i < nodes.length - 1 && <span className="px-1.5 text-muted-foreground">→</span>}
           </motion.span>
         ))}
@@ -61,7 +61,7 @@ export function BouncerDemo() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: nodes.length * 0.18, type: "spring", stiffness: 300 }}
           className="ml-3 -rotate-3 border-[2.5px] px-2 py-0.5 text-sm font-bold"
-          style={{ color: TONE[skill.verdict], borderColor: TONE[skill.verdict], borderRadius: "6px 3px 8px 3px" }}
+          style={{ color: TONE[skill.verdict], borderColor: TONE[skill.verdict] }}
         >
           {skill.verdict}
         </motion.span>

@@ -160,7 +160,7 @@ export function InteractiveTerminal() {
   return (
     <div
       ref={scroller}
-      data-no-doodle
+     
       onClick={() => inputRef.current?.focus()}
       className="bg-[#151515] text-[#e5e5e0] p-4 font-mono text-[11px] sm:text-xs leading-relaxed h-[240px] overflow-y-auto no-scrollbar"
     >

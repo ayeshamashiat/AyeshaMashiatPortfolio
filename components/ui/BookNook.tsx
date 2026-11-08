@@ -33,11 +33,11 @@ export function BookNoteBody() {
 
   return (
     <>
-      <div className="mt-1.5 flex items-end gap-[3px] border-b-[3px] border-[#1a1a1a] px-0.5">
+      <div className="mt-1.5 flex items-end gap-[3px] border-b-2 border-foreground px-0.5">
         {[...reading, ...read].slice(0, 7).map((b) => (
           <span
             key={b.title}
-            className="block w-[10px] border-2 border-[#1a1a1a]"
+            className="block w-[10px] border border-foreground"
             style={{ height: 22 + (hash(b.title) % 14), background: PALETTE[hash(b.title) % PALETTE.length], borderRadius: "2px 3px 1px 2px" }}
           />
         ))}
@@ -60,7 +60,7 @@ export function BookNoteBody() {
         <button
           onPointerDown={(e) => e.stopPropagation()}
           onClick={pull}
-          className="mt-2 rounded-full border-2 border-[#1a1a1a] bg-white/60 px-2.5 py-0.5 font-display text-xs font-bold hover:bg-white"
+          className="mt-2 border border-foreground bg-background/70 px-2.5 py-0.5 font-display text-xs font-bold hover:bg-[var(--yellow)] hover:text-[#1a1a1a]"
         >
           pull a favourite
         </button>

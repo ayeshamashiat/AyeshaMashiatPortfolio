@@ -25,13 +25,13 @@ export async function WritingSection() {
   if (!posts.length) return null;
 
   return (
-    <section id="writing" className="mx-auto max-w-6xl px-6 py-28 md:px-12 lg:px-24">
-      <SectionHeading index="04" title="Technical Writing" />
+    <section id="writing" className="mx-auto max-w-6xl px-6 py-16 md:px-12 lg:px-24">
+      <SectionHeading index="05" title="Technical Writing" bn="টেকনিক্যাল লেখা" />
 
       <div className="grid gap-6 md:grid-cols-3">
         {posts.slice(0, 3).map((p, i) => (
           <AnimatedSection key={p.url} delay={i * 0.08}>
-            <a href={p.url} target="_blank" rel="noreferrer" className="doodle-card group flex h-full flex-col p-5">
+            <a href={p.url} target="_blank" rel="noreferrer" className="panel group flex h-full flex-col p-5">
               <span className="font-mono text-[11px] text-muted-foreground">
                 {p.readable_publish_date} · {p.reading_time_minutes} min read
               </span>
@@ -45,7 +45,7 @@ export async function WritingSection() {
         ))}
       </div>
       <p className="mt-6 text-sm text-muted-foreground">
-        More at <a href={LINKS.devto} className="text-foreground underline decoration-wavy">dev.to/ayeshamashiat</a>
+        More at <a href={LINKS.devto} className="text-foreground underline decoration-2">dev.to/ayeshamashiat</a>
       </p>
     </section>
   );

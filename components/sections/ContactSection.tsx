@@ -4,18 +4,18 @@ import { useState } from "react";
 import { ArrowUpRight, Dices, Mail } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CvButton } from "@/components/ui/CvButton";
 import { CONTACT_EMAIL, LINKS, STARTERS } from "@/lib/content";
 import { useLang } from "@/lib/i18n";
 
 const SOCIALS = [
+  { name: "LinkedIn", href: LINKS.linkedin },
   { name: "GitHub", href: LINKS.github },
   { name: "DEV", href: LINKS.devto },
   { name: "Instagram", href: LINKS.instagram },
   { name: "Facebook", href: LINKS.facebook },
 ];
 
-export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
+export function ContactSection() {
   const { t } = useLang();
   const [starter, setStarter] = useState(0);
   const [name, setName] = useState("");
@@ -103,7 +103,6 @@ export function ContactSection({ hasCv = false }: { hasCv?: boolean }) {
 
         <AnimatedSection delay={0.15}>
           <h3 className="kicker mb-2 border-b border-foreground pb-2">{t("Elsewhere", "অন্যত্র")}</h3>
-          {hasCv && <div className="mb-3 mt-3"><CvButton /></div>}
           <ul>
             {SOCIALS.map((s) => (
               <li key={s.name}>

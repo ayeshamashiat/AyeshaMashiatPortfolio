@@ -3,12 +3,16 @@
 import { ArrowDown } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Workbench } from "@/components/ui/Workbench";
-import { CvButton } from "@/components/ui/CvButton";
+import type { Weather } from "@/lib/weather";
 import { useLang } from "@/lib/i18n";
 
 /** The front page: lead story on the left, a sidebar of clippings on the right. */
-export function HeroSection({ hasCv = false }: { hasCv?: boolean }) {
+export function HeroSection({ weather = null }: { weather?: Weather | null }) {
   const { t } = useLang();
+  const intro = t(
+    "I’m Ayesha, a senior year Software Engineering student at IUT in Dhaka. I build backend software and I’m currently interning at RedDot Digital as a SWE intern. I like hackathons (some would say I am addicted to them). Outside of code I read a lot, drink far too much cha and currently hyperfixating on history rabbitholes.",
+    "আমি আয়েশা, ঢাকায় আইইউটি-তে সফটওয়্যার ইঞ্জিনিয়ারিংয়ের শেষ বর্ষে পড়ছি। ব্যাকএন্ড সফটওয়্যার বানাই, এখন রেডডট ডিজিটালে এসডব্লিউই ইন্টার্ন হিসেবে কাজ করছি। হ্যাকাথন আমার খুব প্রিয় (কেউ কেউ বলবে নেশা)। কোডের বাইরে প্রচুর বই পড়ি, প্রচুর চা খাই, আর আজকাল ইতিহাসের র‍্যাবিট হোলে মজে আছি।",
+  );
 
   return (
     <section className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 py-12 md:px-12 lg:grid-cols-12 lg:px-24">
@@ -24,11 +28,9 @@ export function HeroSection({ hasCv = false }: { hasCv?: boolean }) {
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
-          <p className="dropcap mt-6 text-lg leading-relaxed md:columns-2 md:gap-8 md:text-xl col-rule">
-            {t(
-              "A third-year SWE student at IUT, based in Dhaka, I love the invisible parts of software: APIs, databases and auth that quietly hold everything up. I also tinker with AI on the side, run on far too much cha, and keep about seventeen tabs open at all times.",
-              "আমি আইইউটি-র সফটওয়্যার ইঞ্জিনিয়ারিংয়ের তৃতীয় বর্ষের শিক্ষার্থী, থাকি ঢাকায়। সফটওয়্যারের অদৃশ্য অংশগুলো আমার প্রিয়: এপিআই, ডাটাবেস আর অথেনটিকেশন, যারা নিঃশব্দে সবকিছু ধরে রাখে। পাশাপাশি এআই নিয়ে নাড়াচাড়া করি, প্রচুর চা খাই, আর সবসময় প্রায় সতেরোটা ট্যাব খুলে রাখি।",
-            )}
+          <p className="mt-6 text-lg leading-relaxed md:columns-2 md:gap-8 md:text-xl col-rule">
+            <span className="float-left pr-[0.1em] pt-[0.06em] font-display text-[4.4em] font-black leading-[0.82]">{intro.charAt(0)}</span>
+            {intro.slice(1)}
           </p>
         </AnimatedSection>
 
@@ -37,7 +39,6 @@ export function HeroSection({ hasCv = false }: { hasCv?: boolean }) {
             <a href="#projects" className="btn gap-2 px-6 py-3 uppercase tracking-wider">
               {t("View my projects", "আমার প্রজেক্ট দেখুন")} <ArrowDown className="h-4 w-4" />
             </a>
-            {hasCv && <CvButton />}
             <a href="#contact" className="font-display font-bold underline decoration-2 underline-offset-4 hover:text-[var(--red)]">
               {t("or get in touch", "অথবা যোগাযোগ করুন")}
             </a>
@@ -46,7 +47,7 @@ export function HeroSection({ hasCv = false }: { hasCv?: boolean }) {
       </div>
 
       <AnimatedSection delay={0.15} className="lg:col-span-5">
-        <Workbench />
+        <Workbench weather={weather} />
       </AnimatedSection>
     </section>
   );

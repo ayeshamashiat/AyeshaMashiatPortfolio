@@ -8,14 +8,16 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 import { WritingSection } from "@/components/sections/WritingSection";
 import { PuzzlesSection } from "@/components/sections/PuzzlesSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { FloatingCv } from "@/components/ui/FloatingCv";
 import { Navbar } from "@/components/ui/Navbar";
 import { NewsTicker } from "@/components/ui/NewsTicker";
 import { getArrivals } from "@/lib/github";
+import { getWeather } from "@/lib/weather";
 
 export default async function Home() {
   // The CV button only shows once the PDF is actually in /public.
   const hasCv = existsSync(join(process.cwd(), "public", "AyeshaMashiatResume.pdf"));
-  const arrivals = await getArrivals();
+  const [arrivals, weather] = await Promise.all([getArrivals(), getWeather()]);
 
   return (
     <main className="relative min-h-screen">
@@ -23,14 +25,15 @@ export default async function Home() {
       <div className="px-6 pt-4 md:px-12 lg:px-24">
         <NewsTicker arrivals={arrivals} />
       </div>
-      <HeroSection hasCv={hasCv} />
+      <HeroSection weather={weather} />
       <LatelySection arrivals={arrivals} />
       <ProjectsSection />
       <JourneySection />
       <SkillsSection />
       <WritingSection />
       <PuzzlesSection />
-      <ContactSection hasCv={hasCv} />
+      <ContactSection />
+      {hasCv && <FloatingCv />}
     </main>
   );
 }

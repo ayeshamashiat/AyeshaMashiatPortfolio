@@ -147,6 +147,8 @@ export interface JourneyStop {
 
 /** Education, hackathons and work on one line, oldest first. From the CV in /public. */
 export const JOURNEY: JourneyStop[] = [
+  { id: "ssc", kind: "study", when: "2020", title: "South Point School", detail: "Secondary School Certificate (SSC), Dhaka." },
+  { id: "hsc", kind: "study", when: "2022", title: "South Point College", detail: "Higher Secondary Certificate (HSC), Dhaka." },
   { id: "iut", kind: "study", when: "2023 – 2027 (expected)", title: "Islamic University of Technology", detail: "B.Sc. in Software Engineering." },
   { id: "solvio", kind: "hackathon", when: "2025", title: "Solvio AI Hackathon", detail: "Top 100 teams, Phase 2 qualifier.", cert: "/resources/Achievement/SOLVIO_Top100_Certificate_Team_336.png" },
   { id: "ictfest", kind: "hackathon", when: "2026", title: "IUT 12th ICT Fest", detail: "Finalist: top 20 of 700+ teams." },

@@ -10,8 +10,8 @@ import { useLang } from "@/lib/i18n";
 export function HeroSection({ weather = null }: { weather?: Weather | null }) {
   const { t } = useLang();
   const intro = t(
-    "I’m Ayesha, a senior year Software Engineering student at IUT in Dhaka. I build backend software and I’m currently interning at RedDot Digital as a SWE intern. I like hackathons (some would say I am addicted to them). Outside of code I read a lot, drink far too much cha and currently hyperfixating on history rabbitholes.",
-    "আমি আয়েশা, ঢাকায় আইইউটি-তে সফটওয়্যার ইঞ্জিনিয়ারিংয়ের শেষ বর্ষে পড়ছি। ব্যাকএন্ড সফটওয়্যার বানাই, এখন রেডডট ডিজিটালে এসডব্লিউই ইন্টার্ন হিসেবে কাজ করছি। হ্যাকাথন আমার খুব প্রিয় (কেউ কেউ বলবে নেশা)। কোডের বাইরে প্রচুর বই পড়ি, প্রচুর চা খাই, আর আজকাল ইতিহাসের র‍্যাবিট হোলে মজে আছি।",
+    "I am Ayesha Mashiat, a senior year Software Engineering student at IUT in Dhaka. I build backend software and I am currently interning at RedDot Digital as a SWE intern. I like hackathons (some would say I am addicted to them). Outside of code I read a lot, drink far too much cha and am currently hyperfixating on history rabbitholes.",
+    "আমি আয়েশা মাশিয়াত, ঢাকায় আইইউটি-তে সফটওয়্যার ইঞ্জিনিয়ারিংয়ের শেষ বর্ষে পড়ছি। ব্যাকএন্ড সফটওয়্যার বানাই, এখন রেডডট ডিজিটালে এসডব্লিউই ইন্টার্ন হিসেবে কাজ করছি। হ্যাকাথন আমার খুব প্রিয় (কেউ কেউ বলবে নেশা)। কোডের বাইরে প্রচুর বই পড়ি, প্রচুর চা খাই, আর আজকাল ইতিহাসের র‍্যাবিট হোলে মজে আছি।",
   );
 
   return (

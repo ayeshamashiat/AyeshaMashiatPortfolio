@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { bnNum, useLang } from "@/lib/i18n";
 import { toBanglaDate } from "@/lib/banglaDate";
+import { KeffiyehBand } from "@/components/ui/Keffiyeh";
 
 const SECTIONS = [
   { en: "Lately", bn: "সাম্প্রতিক", href: "#lately" },
@@ -73,7 +74,7 @@ export function Navbar({ hasCv = false }: { hasCv?: boolean }) {
   return (
     <>
       <header id="top" className="mx-auto max-w-6xl px-6 pt-3 md:px-12 lg:px-24">
-        <div className="font-ui flex items-center justify-between gap-3 border-b border-foreground pb-2 text-[13px]">
+        <div className="font-ui flex items-center justify-between gap-3 pb-2 text-[13px]">
           <span suppressHydrationWarning className="min-w-0 truncate">
             <span className="font-bold">{t("Dhaka", "ঢাকা")}</span>
             {dateline.greg && <span className="text-muted-foreground"> · {dateline.greg}</span>}
@@ -91,6 +92,7 @@ export function Navbar({ hasCv = false }: { hasCv?: boolean }) {
             </button>
           </span>
         </div>
+        <KeffiyehBand height={14} label={t("Keffiyeh print, in solidarity with Palestine", "কেফিয়েহ নকশা, ফিলিস্তিনের সাথে সংহতি")} />
 
         <a href="#top" aria-label="Ayesha Mashiat, home" className="flex items-center justify-center gap-4 py-4 text-center md:gap-8 md:py-6">
           <span aria-hidden className="hidden h-px flex-1 bg-foreground md:block" />

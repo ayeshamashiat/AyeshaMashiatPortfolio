@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { BookNoteBody } from "@/components/ui/BookNook";
 import { WeatherBox } from "@/components/ui/WeatherBox";
+import { PrayerBox } from "@/components/ui/PrayerBox";
 import { useLang } from "@/lib/i18n";
 import type { Weather } from "@/lib/weather";
 
@@ -18,16 +19,18 @@ const FACTS: { label: [string, string]; value?: [string, string]; reading?: bool
   { label: ["Reading", "বই"], reading: true },
 ];
 
-/** Front-page sidebar: a profile box set like a newspaper fact file, plus the weather box. */
+const TABS = { about: ["About me", "আমার কথা"], weather: ["Weather", "আবহাওয়া"], prayer: ["Prayer", "নামাজ"] } as const;
+
+/** Front-page sidebar: a profile box set like a newspaper fact file, plus the weather and prayer-times boxes. */
 export function Workbench({ weather = null }: { weather?: Weather | null }) {
-  const [tab, setTab] = useState<"about" | "weather">("about");
+  const [tab, setTab] = useState<keyof typeof TABS>("about");
   const { lang } = useLang();
   const i = lang === "bn" ? 1 : 0;
 
   return (
     <div className="panel p-4">
       <div role="tablist" className="mb-3 flex gap-5 border-b border-foreground font-display text-sm font-bold uppercase tracking-wider">
-        {(["about", "weather"] as const).map((t) => (
+        {(Object.keys(TABS) as (keyof typeof TABS)[]).map((t) => (
           <button
             key={t}
             role="tab"
@@ -35,7 +38,7 @@ export function Workbench({ weather = null }: { weather?: Weather | null }) {
             onClick={() => setTab(t)}
             className={`-mb-px border-b-[3px] pb-1.5 transition-colors ${tab === t ? "border-[var(--red)]" : "border-transparent text-muted-foreground hover:text-foreground"}`}
           >
-            {t === "about" ? (lang === "bn" ? "আমার কথা" : "About me") : lang === "bn" ? "আবহাওয়া" : "Weather"}
+            {TABS[t][i]}
           </button>
         ))}
       </div>
@@ -58,8 +61,10 @@ export function Workbench({ weather = null }: { weather?: Weather | null }) {
             ))}
           </dl>
         </div>
-      ) : (
+      ) : tab === "weather" ? (
         <WeatherBox weather={weather} />
+      ) : (
+        <PrayerBox />
       )}
     </div>
   );

@@ -13,6 +13,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { NewsTicker } from "@/components/ui/NewsTicker";
 import { getArrivals } from "@/lib/github";
 import { getWeather } from "@/lib/weather";
+import { PrayerBulletin } from "@/components/ui/PrayerBox";
 
 export default async function Home() {
   // The CV button only shows once the PDF is actually in /public.
@@ -23,6 +24,7 @@ export default async function Home() {
     <main className="relative min-h-screen">
       <Navbar hasCv={hasCv} />
       <div className="px-6 pt-4 md:px-12 lg:px-24">
+        <PrayerBulletin />
         <NewsTicker arrivals={arrivals} />
       </div>
       <HeroSection weather={weather} />
